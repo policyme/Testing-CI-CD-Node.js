@@ -18,7 +18,7 @@ var content = ''
 
 for (var i = 0; i < commits.length ; i++) {
     console.log(commits[i].subject)
-    content +=  commits[i].subject
+    content +=  commits[i].subject + '\n'
 }
 
 const insert = new Buffer(content)
