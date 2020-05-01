@@ -14,23 +14,25 @@ function gen_changelog(){
     };
 
     const commits = gitlog(options);
-    var fs = require('file-system');
 
-    const data = fs.readFileSync('CHANGELOG.md')
-    const fd = fs.openSync('CHANGELOG.md', 'a+')
+    console.log(commits[0].subject)
+    // var fs = require('file-system');
 
-    var content = ''
+    // const data = fs.readFileSync('CHANGELOG.md')
+    // const fd = fs.openSync('CHANGELOG.md', 'a+')
 
-    for (var i = 0; i < commits.length ; i++) {
-        content +=  commits[i].subject + '\n'
-    }
+    // var content = ''
 
-    const insert = new Buffer(content)
-    fs.writeSync(fd, insert, 0, insert.length, 0)
-    fs.writeSync(fd, data, 0, data.length, insert.length)
-    fs.close(fd, (err) => {
-        if (err) throw err;
-    });
+    // for (var i = 0; i < commits.length ; i++) {
+    //     content +=  commits[i].subject + '\n'
+    // }
+
+    // const insert = new Buffer(content)
+    // fs.writeSync(fd, insert, 0, insert.length, 0)
+    // fs.writeSync(fd, data, 0, data.length, insert.length)
+    // fs.close(fd, (err) => {
+    //     if (err) throw err;
+    // });
 }
 
 gen_changelog()
