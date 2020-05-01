@@ -19,9 +19,10 @@ function gen_changelog(){
     };
 
     var commits = gitlog(options);
-    
+
     let ticket_set = new Set()
 
+    
     if(commits[0].subject.split(" ")[0] == "Merge"){
 
         var version = require('./app/gui/package.json');
