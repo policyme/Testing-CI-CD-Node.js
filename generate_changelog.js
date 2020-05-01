@@ -47,6 +47,7 @@ function gen_changelog(){
         }
 
         console.log(ticket_set)
+        
 
         const insert = new Buffer(content)
         fs.writeSync(fd, insert, 0, insert.length, 0)
