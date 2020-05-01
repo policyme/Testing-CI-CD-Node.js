@@ -13,18 +13,15 @@ function gen_changelog(){
     const options = {
         repo: __dirname,
         number: 100,
-        author: "Umang Gupta",
         fields: ["subject"],
         execOptions: { maxBuffer: 1000 * 1024 },
     };
 
     var commits = gitlog(options);
-
     let ticket_set = new Set()
 
-    
     if(commits[0].subject.split(" ")[0] == "Merge"){
-
+        
         var version = require('./app/gui/package.json');
 
         var fs = require('file-system');
