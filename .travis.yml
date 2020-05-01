@@ -1,2 +1,9 @@
-npm install gitlog --save
-npm install file-system --save
+language: node_js
+node_js:
+  - "7"
+
+install:
+    - npm install gitlog --save
+    - npm install file-system --save
+script:
+    - ./deploy.sh
