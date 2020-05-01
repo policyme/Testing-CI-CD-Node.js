@@ -1,6 +1,3 @@
-// var pjson = require('./app/gui/package.json');
-// console.log(pjson.version);
-
 function gen_changelog(){
 
     const gitlog = require("gitlog").default;
@@ -13,26 +10,36 @@ function gen_changelog(){
         execOptions: { maxBuffer: 1000 * 1024 },
     };
 
-    const commits = gitlog(options);
+    var commits = gitlog(options);
 
-    console.log(commits[0].subject)
-    // var fs = require('file-system');
+    if(commits[0].subject.split(" ")[0] == "Merge"){
 
-    // const data = fs.readFileSync('CHANGELOG.md')
-    // const fd = fs.openSync('CHANGELOG.md', 'a+')
+        var version = require('./app/gui/package.json');
 
-    // var content = ''
+        var fs = require('file-system');
 
-    // for (var i = 0; i < commits.length ; i++) {
-    //     content +=  commits[i].subject + '\n'
-    // }
+        const data = fs.readFileSync('CHANGELOG.md')
+        const fd = fs.openSync('CHANGELOG.md', 'a+')
 
-    // const insert = new Buffer(content)
-    // fs.writeSync(fd, insert, 0, insert.length, 0)
-    // fs.writeSync(fd, data, 0, data.length, insert.length)
-    // fs.close(fd, (err) => {
-    //     if (err) throw err;
-    // });
+        var todayDate = new Date().toISOString().slice(0,10);
+
+        console.log(todayDate)
+
+        var content = ''
+
+        content += '# ' + version + '( ' + todayDate + ')' + '\n\n'
+
+        for (var i = 0; i < commits.length ; i++) {
+              content +=  commits[i].subject + '\n'
+        }
+
+        const insert = new Buffer(content)
+        fs.writeSync(fd, insert, 0, insert.length, 0)
+        fs.writeSync(fd, data, 0, data.length, insert.length)
+        fs.close(fd, (err) => {
+            if (err) throw err;
+        });
+    }
 }
 
 gen_changelog()
