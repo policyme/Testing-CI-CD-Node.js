@@ -16,7 +16,6 @@ function bump_verison(){
     if(commits[0].subject.split(" ")[0] == "Merge"){
         parse_version = version.version.split("-")
 
-        
         if(parse_version.length == 1){
             // Need to append -dev-1 to it
             version.version += '-dev-1'
