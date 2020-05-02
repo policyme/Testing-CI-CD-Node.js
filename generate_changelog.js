@@ -28,7 +28,7 @@ function gen_changelog(){
         var fs = require('file-system');
 
         const data = fs.readFileSync('CHANGELOG.md')
-        const fd = fs.openSync('CHANGELOG.md', 'a+')
+        const fd = fs.openSync('CHANGELOG.md', 'w+')
 
         var todayDate = new Date().toISOString().slice(0,10).toString();
 
