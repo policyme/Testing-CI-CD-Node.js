@@ -26,6 +26,8 @@ function bump_verison(){
             version.version += parse_version[0] + '-' + parse_version[1] + '-' + parse_version[2]
         }
 
+        
+
         // Writing the updated version back to the 
         // package.json file
 
