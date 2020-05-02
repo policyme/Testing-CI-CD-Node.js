@@ -1,6 +1,6 @@
 {
   "name": "gui",
-  "version": "0.1.0-dev-4",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
