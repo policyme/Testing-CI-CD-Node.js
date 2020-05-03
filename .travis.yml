@@ -5,6 +5,12 @@ node_js:
 install:
     - npm install gitlog --save
     - npm install file-system --save
+    - npm install jest --save
+
+before_script: cd app/gui
 
 script:
-    - ./deploy.sh
+    - npm run test
+
+after_success:
+  - ./deploy.sh
