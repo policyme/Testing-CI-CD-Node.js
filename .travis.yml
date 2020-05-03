@@ -7,10 +7,5 @@ install:
     - npm install file-system --save
     - npm install jest --save
 
-before_script: cd app/gui
-
 script:
-    - npm run test
-
-after_success:
-  - ./deploy.sh
+    - ./deploy.sh
