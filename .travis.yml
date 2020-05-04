@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "13"
+ 
+install:
+    - npm install gitlog --save
+    - npm install file-system --save
+    - npm install jest --save
+
+script:
+    - ./deploy.sh
