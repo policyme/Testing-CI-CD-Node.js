@@ -1,5 +1,14 @@
 if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
     
+    run_test(){
+      # Run the jest unit tests
+      cd app/gui 
+      # Installing the node dependency 
+      npm install
+      # Run the test command
+      npm run test 
+    }
+
     # Bumps the version
     node ./bump_dev_version.js
 
@@ -15,15 +24,10 @@ if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
       git remote add feature/ST-1234-Testing  https://${TOLKEN}@github.com/policyme/Testing-CI-CD-Node.js.git > /dev/null 2>&1
       git push feature/ST-1234-Testing HEAD:feature/ST-1234-Testing
     }
+
+    run_test
     commit_file
     upload_files
 
-    # Run the jest unit tests
-    cd app/gui 
-
-    npm install
-
-    # Run the test command
-    npm run test 
 
 fi
