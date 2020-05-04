@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - "6.13.6"
-
+  - "7"
+ 
 install:
     - npm install gitlog --save
     - npm install file-system --save
