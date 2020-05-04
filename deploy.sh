@@ -1,10 +1,10 @@
 if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
     
     # Bumps the version
-    node ./bump_dev_version.js
+    node ./../../bump_dev_version.js
 
     # Generates the changelog 
-    node ./generate_changelog.js
+    node ./../../generate_changelog.js
 
     commit_file() {
       git add *
