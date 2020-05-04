@@ -20,9 +20,9 @@ if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
 
     # Run the jest unit tests
     cd app/gui 
-    
+
     # Run the test command
-    npm run test 
+    sudo npm run test 
 
 
 fi
