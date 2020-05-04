@@ -1,3 +1,8 @@
+# 0.1.0-dev-8 (2020-05-04)
+
+* https://policyme.atlassian.net/browse/ST-7899
+
+
 # 0.1.0-dev-7 (2020-05-04)
 
 * https://policyme.atlassian.net/browse/ST-7899
