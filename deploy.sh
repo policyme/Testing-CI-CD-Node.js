@@ -20,10 +20,7 @@ if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
 
     # Run the jest unit tests
     cd app/gui 
-
-    # Install all the node modules
-    npm install
-
+    
     # Run the test command
     npm run test 
 
