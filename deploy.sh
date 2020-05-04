@@ -1,11 +1,11 @@
 if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
     
     # Bumps the version
-    node ./../../bump_dev_version.js
+    node ./bump_dev_version.js
 
     # Generates the changelog 
-    node ./../../generate_changelog.js
-
+    node ./generate_changelog.js
+  
     commit_file() {
       git add *
       git commit --message "Updating the CHANGELOG.md and the _version file"
@@ -17,6 +17,12 @@ if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
     }
     commit_file
     upload_files
+
+    # Run the jest unit tests
+    cd app/gui 
+
+    # Run the test command
+    npm run test 
 
 
 fi
