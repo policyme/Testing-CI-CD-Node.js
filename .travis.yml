@@ -11,5 +11,5 @@ before_script:
   - cd app/gui
 
 script:
-    - ./deploy.sh
+    - ./../../deploy.sh 
     - npm run test
