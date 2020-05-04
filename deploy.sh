@@ -24,5 +24,4 @@ if [ "$TRAVIS_BRANCH" == "feature/ST-1234-Testing" ]; then
     # Run the test command
     sudo npm run test 
 
-
 fi
