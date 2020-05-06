@@ -25,7 +25,7 @@ function gen_changelog(){
 
     if(commits[0].subject.split(" ")[0] == "Merge"){
         
-        var version = require('./app/gui/package.json');
+        var version = require('../app/gui/package.json');
 
         var fs = require('file-system');
 

@@ -1,7 +1,7 @@
 
 function bump_verison(){
 
-    var version = require('./app/gui/package.json');
+    var version = require('../app/gui/package.json');
     const gitlog = require("gitlog").default;
 
     const options = {
