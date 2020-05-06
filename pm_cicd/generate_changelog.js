@@ -69,7 +69,7 @@ function gen_changelog() {
     content += '\n\n';
 
     // Prepending tjhe new content to the file
-    const insert = Buffer.alloc(content);
+    const insert = new Buffer(content);
     fs.writeSync(fd, insert, 0, insert.length, 0);
     fs.writeSync(fd, data, 0, data.length, insert.length);
     fs.close(fd, (err) => {
