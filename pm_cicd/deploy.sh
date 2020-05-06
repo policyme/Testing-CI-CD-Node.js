@@ -24,6 +24,7 @@ if [ "$TRAVIS_BRANCH" == "develop" ]; then
       git add *
       git commit --message "Updating the CHANGELOG.md and the _version file"
     }
+    
 
     upload_files() {
       git remote add develop  https://${TOKEN}@github.com/policyme/${REPO_NAME}.js.git > /dev/null 2>&1
