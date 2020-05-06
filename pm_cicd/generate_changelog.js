@@ -1,3 +1,6 @@
+var version = require('../app/gui/package.json');
+console.log(version.version)
+
 function is_pull_request(commit){
     parse_array = commit.split(" ")
         if(parse_array[0] == 'Merge' && parse_array[1] == 'pull' && parse_array[2] == 'request'){
