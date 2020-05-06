@@ -26,7 +26,7 @@ if [ "$TRAVIS_BRANCH" == "develop" ]; then
     }
 
     upload_files() {
-      git remote add develop  https://${TOLKEN}@github.com/policyme/Testing-CI-CD-Node.js.git > /dev/null 2>&1
+      git remote add develop  https://${TOKEN}@github.com/policyme/${REPO_NAME}.js.git > /dev/null 2>&1
       git push develop HEAD:develop
     }
 
