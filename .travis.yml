@@ -8,4 +8,4 @@ install:
     - npm install jest --save
 
 script:
-    - ./deploy.sh
+    - ./pm_cicd/deploy.sh
