@@ -15,10 +15,10 @@ fi
 if [ "$TRAVIS_BRANCH" == "develop" ]; then
 
     # Bumps the version
-    node ./bump_dev_version.js
+    node pm_cicd/bump_dev_version.js
 
     # Generates the changelog 
-    node ./generate_changelog.js
+    node pm_cicd/generate_changelog.js
   
     commit_file() {
       git add *

@@ -1,3 +1,6 @@
+var version = require('../app/gui/package.json');
+console.log(version.version)
+
 function is_pull_request(commit){
     parse_array = commit.split(" ")
         if(parse_array[0] == 'Merge' && parse_array[1] == 'pull' && parse_array[2] == 'request'){
@@ -25,7 +28,7 @@ function gen_changelog(){
 
     if(commits[0].subject.split(" ")[0] == "Merge"){
         
-        var version = require('./app/gui/package.json');
+        var version = require('../app/gui/package.json');
 
         var fs = require('file-system');
 
