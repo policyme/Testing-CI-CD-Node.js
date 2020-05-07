@@ -2,9 +2,9 @@
 import os
 import sys
 from datetime import date
-from pm_cicd.get_commit_log import get_commits
+from get_commit_log import get_commits
 sys.path.insert(0, os.getcwd())
-from package._version import VERSION
+# from package._version import VERSION
 
 def gen_changelog():
   '''Function to generate the changelog'''
@@ -32,7 +32,7 @@ def gen_changelog():
     contents = ''
 
     # Getting the version number
-    version = VERSION
+    version = '1.0.0'
 
     # Adding the version number and the JIRA ticket number
     contents += '# ' + version + ' (' + d1 + ')' + '\n\n'
@@ -61,7 +61,7 @@ def gen_changelog():
       jira_link = ''
 
     # Writing to the CHANGELOG.md file
-    with open("./CHANGELOG.md", 'r+') as f:
+    with open("../CHANGELOG.md", 'r+') as f:
       prev_content = f.read()
       # Prepends the contents to the top of the file
       f.seek(0, 0)
@@ -69,5 +69,3 @@ def gen_changelog():
       f.write(contents + '\n' + prev_content)
       # Closes the file
       f.close()
-
-gen_changelog()
