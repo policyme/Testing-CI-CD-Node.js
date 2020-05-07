@@ -1,0 +1,1 @@
+pip3 install --extra-index-url ${PYPI_EXTRA_INDEX_URL} --trusted-host ${PYPI_TRUSTED_HOST} -r requirements_travis.txt

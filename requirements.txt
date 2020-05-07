@@ -1,0 +1,2 @@
+test_version==4.0.1
+python-semantic-release==6.3.0
