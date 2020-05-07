@@ -6,7 +6,7 @@ install:
     - npm install gitlog --save
     - npm install file-system --save
     - npm install jest --save
-    - ./install_requirements
 
 script:
+    - ./install_requirements
     - ./pm_cicd/deploy.sh
