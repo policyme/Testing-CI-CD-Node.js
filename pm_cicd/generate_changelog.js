@@ -36,6 +36,7 @@ function gen_changelog() {
     // Wtites to the file CHANGELOG.MD
     const fd = fs.openSync('CHANGELOG.md', 'w+');
 
+    
     // Gets today's date
     let todayDate = new Date().toISOString().slice(0, 10).toString();
 
