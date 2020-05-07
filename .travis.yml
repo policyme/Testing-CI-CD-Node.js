@@ -5,6 +5,8 @@ python:
 
 script:
     - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
+    - ./jest_unit_test
 
 install:
     - pip3 install --extra-index-url $PYPI_EXTRA_INDEX_URL --trusted-host $PYPI_TRUSTED_HOST -r requirements_travis.txt
+    - npm install jest --save
