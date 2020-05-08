@@ -1,3 +1,3 @@
 -r requirements.txt
-pm_cicd==14.0.0
+pm_cicd==99.0.0
 
