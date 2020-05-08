@@ -1,3 +1,10 @@
+# 0.1.0-dev-13 (2020/05/08)
+
+* https://policyme.atlassian.net/browse/ST-5678
+* https://policyme.atlassian.net/browse/ST-12
+* https://policyme.atlassian.net/browse/ST-1689
+* https://policyme.atlassian.net/browse/ST-1234
+
 # 0.1.0-dev-12 (2020/05/08)
 
 * https://policyme.atlassian.net/browse/ST-1234
