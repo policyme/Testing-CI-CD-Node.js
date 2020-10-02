@@ -1,13 +1,13 @@
 language: node_js
 node_js:
   - "12.18.1"
-script:
-  - npm test
-install:
-  - npm install
 
 jobs:
   include:
+    - script:
+        - npm test
+      install:
+        - npm install
     - language: python
       python: 3.6
       install: |
