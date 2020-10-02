@@ -32,6 +32,6 @@ def get_ticket_number(text):
   if len(parsed_message) > 1:
     ticket_type = parsed_message[0].upper()
     ticket_number = parsed_message[1]
-    if number.isdigit():
+    if ticket_number.isdigit():
       return ticket_type + '-' + ticket_number
   return None
