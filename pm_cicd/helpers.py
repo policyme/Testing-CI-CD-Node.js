@@ -4,6 +4,7 @@ import os
 from subprocess import run, PIPE, STDOUT
 
 COMMIT_MESSAGE = "Updating CHANGELOG.md and bumping the dev version [skip ci]"
+CHANGELOG_FILE = "CHANGELOG.md"
 
 # Logic to search for _version.py file and the package.json file
 def find_version_path():
