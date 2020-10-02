@@ -1,5 +1,5 @@
 {
-  "name": "gui",
+  "name": "cicd-node",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,10 +10,13 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
+  "devDependencies": {
+    "jest": "^26.4.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
