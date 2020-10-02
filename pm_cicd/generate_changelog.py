@@ -67,6 +67,7 @@ def gen_changelog(lang):
           if len(tokens) > 5:
             tokens = tokens[5].split('/')
             if len(tokens) > 2:
+              print(tokens)
               parsed_message = tokens[2].split('-')
               ticket = parsed_message[0].upper() + '-' + parsed_message[1]
               ticket_numbers.add(ticket)

@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - "12.18.1"
+script:
+  - npm test
+install:
+  - npm install
+
 jobs:
   include:
     - language: python
@@ -15,12 +20,6 @@ jobs:
         if [ -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then
           python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
         fi
-
-script:
-  - npm test
-
-install:
-  - npm install
 
 deploy:
   - provider: elasticbeanstalk
