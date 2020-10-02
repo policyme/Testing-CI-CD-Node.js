@@ -12,9 +12,9 @@ jobs:
       python: 3.6
       install: |
         if [ -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then
+          pip3 install gitpython
           # pip3 install --extra-index-url http://$PYPI_USER:$PYPI_PASS@$PYPI_IP:$PYPI_PORT --trusted-host $PYPI_IP pm_cicd
           # using self library for testing instead
-          pip3 install gitpython
         fi
       script: |
         if [ -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then

@@ -3,7 +3,7 @@ import os
 import sys
 from datetime import date
 import json
-from pm_cicd.helpers import find_version_path, COMMIT_MESSAGE
+from pm_cicd.helpers import find_version_path, COMMIT_MESSAGE, get_ticket_number
 from pm_cicd.get_commit_log import get_commits
 sys.path.insert(0, os.getcwd())
 
@@ -67,10 +67,10 @@ def gen_changelog(lang):
           if len(tokens) > 5:
             tokens = tokens[5].split('/')
             if len(tokens) > 2:
-              print(tokens)
-              parsed_message = tokens[2].split('-')
-              ticket = parsed_message[0].upper() + '-' + parsed_message[1]
-              ticket_numbers.add(ticket)
+              ticket_string = tokens[2]
+              ticket = get_ticket_number(ticket_string)
+              if ticket is not None:
+                ticket_numbers.add(ticket)
       else:
         break
 
