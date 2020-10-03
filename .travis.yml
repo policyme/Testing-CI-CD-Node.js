@@ -2,7 +2,8 @@ stages:
   - name: node_job
   - name: python_job
     # is in the correct branches & merged pr branch
-    if: type = pull_request
+    if: branch IN (develop, master, gabe-test) AND \
+        type = pull_request
 
 jobs:
   include:
@@ -21,7 +22,7 @@ jobs:
         # using built in pm_cicd instead
         - pip3 install gitpython
       script:
-        # - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
+        - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
 
 deploy:
   - provider: elasticbeanstalk
