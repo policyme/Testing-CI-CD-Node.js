@@ -4,7 +4,7 @@ node_js: 12.18.1
 stages:
   - name: node_job
   - name: python_job
-    # only runs this job when it is merged to the approach branch
+    # only runs this job when it is pushed to the appropriate branch
     if: |
       branch IN (develop, master, gabe-test) AND \
       type = push
@@ -26,16 +26,14 @@ jobs:
         - pip3 install gitpython
       script:
         - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
-
-deploy:
-  - provider: elasticbeanstalk
-    access_key_id: $AWS_ACCESS_KEY_ID
-    secret_access_key: $AWS_SECRET_ACCESS_KEY
-    region: us-east-2
-    app: Testing-CICD-Node
-    env: TestingCicdNode-env
-    bucket_name: elasticbeanstalk-us-east-2-405734297549
-    bucket_path: Testing-CICD
-    on:
-      branch: gabe-test
-      
+      deploy:
+        - provider: elasticbeanstalk
+          access_key_id: $AWS_ACCESS_KEY_ID
+          secret_access_key: $AWS_SECRET_ACCESS_KEY
+          region: us-east-2
+          app: Testing-CICD-Node
+          env: TestingCicdNode-env
+          bucket_name: elasticbeanstalk-us-east-2-405734297549
+          bucket_path: Testing-CICD-Node
+          on:
+            branch: gabe-test
