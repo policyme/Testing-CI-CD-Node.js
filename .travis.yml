@@ -1,24 +1,27 @@
+stages:
+  - name: node_job
+  - name: python_job
+    # only runs if it is a merged build
+    if: (branch IN (develop, master, gabe-test)) AND (NOT (type IN (push, pull_request)))
+
 jobs:
   include:
-    - language: node_js
+    - stage: node_job
+      language: node_js
       node_js: 12.18.1
       install:
         - npm install
       script:
         - npm test
-      
-    - language: python
+    - stage: python_job
+      language: python
       python: 3.6
-      install: |
-        if [ -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then
-          # pip3 install --extra-index-url http://$PYPI_USER:$PYPI_PASS@$PYPI_IP:$PYPI_PORT --trusted-host $PYPI_IP pm_cicd
-          # using self library for testing instead
-          pip3 install gitpython
-        fi
-      script: |
-        if [ -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then
-          python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
-        fi
+      install:
+        # - pip3 install --extra-index-url http://$PYPI_USER:$PYPI_PASS@$PYPI_IP:$PYPI_PORT --trusted-host $PYPI_IP pm_cicd
+        # using built in pm_cicd instead
+        - pip3 install gitpython
+      script:
+        - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
 
 deploy:
   - provider: elasticbeanstalk
