@@ -34,6 +34,6 @@ jobs:
           app: Testing-CICD-Node
           env: TestingCicdNode-env
           bucket_name: elasticbeanstalk-us-east-2-405734297549
-          bucket_path: Testing-CICD
+          bucket_path: Testing-CICD-Node
           on:
             branch: gabe-test
