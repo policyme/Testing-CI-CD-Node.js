@@ -3,7 +3,12 @@ import os
 import sys
 from datetime import date
 import json
-from pm_cicd.helpers import find_version_path, COMMIT_MESSAGE, get_ticket_number
+from pm_cicd.helpers import (
+  find_version_path,
+  get_ticket_number,
+  COMMIT_MESSAGE,
+  CHANGELOG_FILE
+)
 from pm_cicd.get_commit_log import get_commits
 sys.path.insert(0, os.getcwd())
 
@@ -13,6 +18,23 @@ def is_pull_request(commit):
   if parse_array[0] == 'Merge' and parse_array[1] == 'pull' and parse_array[2] == 'request':
     return True
   return False
+
+# creates/appends content to changelog
+def add_to_changelog(contents):
+  print('writing to changelog:\n{}'.format(contents))
+  # create file if it doesn't exist
+  if not os.path.exists(CHANGELOG_FILE):
+    open(CHANGELOG_FILE, 'a').close()
+
+  # add contents to the changelog
+  with open(CHANGELOG_FILE, 'r+') as f:
+    prev_content = f.read()
+    # Prepends the contents to the top of the file
+    f.seek(0, 0)
+    # Write the contents into the file
+    f.write(contents + '\n' + prev_content)
+    # Closes the file
+    f.close()
 
 def gen_changelog(lang):
   '''Function to generate the changelog'''
@@ -72,6 +94,7 @@ def gen_changelog(lang):
               if ticket is not None:
                 ticket_numbers.add(ticket)
       else:
+        # no need to read the rest of the commits
         break
 
     # Opening the file
@@ -82,13 +105,4 @@ def gen_changelog(lang):
       # Adding the version number and the JIRA ticket number
       contents += '* [' + jira_link + '](' + jira_link + ')\n'
 
-    print('writing to changelog:\n{}'.format(contents))
-    # Writing to the CHANGELOG.md file
-    with open("./CHANGELOG.md", 'r+') as f:
-      prev_content = f.read()
-      # Prepends the contents to the top of the file
-      f.seek(0, 0)
-      # Write the contents into the file
-      f.write(contents + '\n' + prev_content)
-      # Closes the file
-      f.close()
+    add_to_changelog(contents)
