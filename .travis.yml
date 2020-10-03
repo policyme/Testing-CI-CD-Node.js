@@ -2,8 +2,8 @@ stages:
   - name: node_job
   - name: python_job
     # only runs this job when it is pushed to the approach branch
-    if: branch IN (develop, master, gabe-test)
-
+    if: branch IN (develop, master, gabe-test) AND \
+        type = push
 jobs:
   include:
     - stage: node_job
@@ -18,7 +18,7 @@ jobs:
       python: 3.6
       install:
         # - pip3 install --extra-index-url http://$PYPI_USER:$PYPI_PASS@$PYPI_IP:$PYPI_PORT --trusted-host $PYPI_IP pm_cicd
-        # using built in pm_cicd instead
+        # may not need the install below?
         - pip3 install gitpython
       script:
         - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
