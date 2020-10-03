@@ -18,7 +18,7 @@ jobs:
       python: 3.6
       install:
         # - pip3 install --extra-index-url http://$PYPI_USER:$PYPI_PASS@$PYPI_IP:$PYPI_PORT --trusted-host $PYPI_IP pm_cicd
-        # using built in pm_cicd instead
+        # may not need the install below?
         - pip3 install gitpython
       script:
         - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
