@@ -5,7 +5,7 @@ stages:
   - name: node_job
   - name: python_job
     # only runs this job when it is merged to the approach branch
-    if: branch IN (develop, master, gabe-test) AND env(TRAVIS_PULL_REQUEST_BRANCH) = ''
+    if: branch IN (develop, master, gabe-test) AND env(TRAVIS_PULL_REQUEST_BRANCH) IS blank
 jobs:
   include:
     - stage: node_job
