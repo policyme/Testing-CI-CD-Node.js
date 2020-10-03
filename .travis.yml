@@ -4,7 +4,7 @@ node_js: 12.18.1
 stages:
   - name: node_job
   - name: python_job
-    # only runs this job when it is merged to the approach branch
+    # only runs this job when it is pushed to the appropriate branch
     if: |
       branch IN (develop, master, gabe-test) AND \
       type = push
