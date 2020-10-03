@@ -8,9 +8,6 @@ stages:
     if: |
       branch IN (develop, master, gabe-test) AND \
       type = push
-  - name: deploy
-    if: |
-      branch IN (develop, master, gabe-test)
 jobs:
   include:
     - stage: node_job
@@ -29,7 +26,6 @@ jobs:
         - pip3 install gitpython
       script:
         - python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
-    - stage: deploy
       deploy:
         - provider: elasticbeanstalk
           access_key_id: $AWS_ACCESS_KEY_ID
@@ -39,4 +35,5 @@ jobs:
           env: TestingCicdNode-env
           bucket_name: elasticbeanstalk-us-east-2-405734297549
           bucket_path: Testing-CICD
-      
+          on:
+            branch: gabe-test
