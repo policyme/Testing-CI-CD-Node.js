@@ -2,8 +2,7 @@ stages:
   - name: node_job
   - name: python_job
     # is in the correct branches & merged pr branch
-    if: branch IN (develop, master, gabe-test) AND \
-        type = pull_request
+    if: type = pull_request
 
 jobs:
   include:
