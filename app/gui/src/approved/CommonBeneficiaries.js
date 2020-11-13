@@ -11,11 +11,10 @@ import SecureFooter from '../../components/SecureFooter';
 
 const CommonBeneficiaries = (props) => {
   const handleChooseMyOwn = () => {
-    // logic for getting to the beneficiary pages
     props.nextQuestion();
   };
   const handleUseThisOption = () => {
-    // TODO: logic for automatically adding slices
+    props.nextQuestion();
   };
   return (
     <div className="beneficiaries-container">
