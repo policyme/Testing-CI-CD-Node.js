@@ -46,16 +46,16 @@ jobs:
       #     command: |
       #       sudo pip install setuptools awsebcli --upgrade
       #       sudo pip install -Iv botocore==1.17
-      # - run:
-      #     name: install nvm and use node 12.18.1
-      #     command: |
-      #       # using https://circleci.com/developer/orbs/orb/circleci/node as reference
-      #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.1/install.sh | bash
-      #       NVM_DIR="$HOME/.nvm"
-      #       echo "export NVM_DIR=\"$HOME/.nvm\"" >> $BASH_ENV
-      #       echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\"" >> $BASH_ENV
-      #       source $BASH_ENV
-      #       nvm install v12.18.1 && nvm use v12.18.1 && nvm alias default v12.18.1
+      - run:
+          name: install nvm and use node 12.18.1
+          command: |
+            # using https://circleci.com/developer/orbs/orb/circleci/node as reference
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.1/install.sh | bash
+            NVM_DIR="$HOME/.nvm"
+            echo "export NVM_DIR=\"$HOME/.nvm\"" >> $BASH_ENV
+            echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\"" >> $BASH_ENV
+            source $BASH_ENV
+            nvm install v12.18.1 && nvm use v12.18.1 && nvm alias default v12.18.1
       - run:
           name: pip install pypi pm_cicd and gitpython
           command: |
