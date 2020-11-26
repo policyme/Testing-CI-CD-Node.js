@@ -1,7 +1,124 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+  aws-cli: circleci/aws-cli@1.3.0
+  jq: circleci/jq@2.2.0
+jobs: 
+  eb-check-pull:
+    docker:
+      - image: circleci/python:latest
+    steps: 
+      - checkout
+      - run:
+          name: invoking eb-override.sh to check branch name
+          command: |
+            curl \
+              -H "Authorization: token ${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.v3.raw" \
+              https://api.github.com/repos/policyme/global-tools-development/contents/scripts/eb-override.sh > eb-override.sh
+            # eb-override.sh requires an env arg, though it isn't used here
+            env='dev'
+            if [[ ${CIRCLE_BRANCH} == "master" ]]; then
+              env='prod'
+            fi
+            chmod 744 ./eb-override.sh
+            ./eb-override.sh check-pull ${env} --circleci
+  jest:
+    docker:
+      - image: cimg/node:12.18.1
+    steps:
+      - checkout
+      - run: echo "test"
+      # - run: npm install # install dependencies
+      # - run: npm install --only=dev # install dev dependencies
+      # - run: npm run test-circle-ci # run jest tests
+  deploy:
+    docker:
+      - image: circleci/python:latest
+    steps:
+      - checkout
+      - aws-cli/setup: # using eb cli orb
+          aws-access-key-id: AWS_ACCESS_KEY_ID # env var defined on circleci 
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY # env var defined on circleci 
+          aws-region: AWS_DEFAULT_REGION # env var defined on circleci 
+          version: '2'
+      - run:
+          name: installing eb cli and setuptools
+          command: |
+            sudo pip install setuptools awsebcli --upgrade
+            sudo pip install -Iv botocore==1.17
+      - run:
+          name: install nvm and use node 12.18.1
+          command: |
+            # using https://circleci.com/developer/orbs/orb/circleci/node as reference
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.1/install.sh | bash
+            NVM_DIR="$HOME/.nvm"
+            echo "export NVM_DIR=\"$HOME/.nvm\"" >> $BASH_ENV
+            echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\"" >> $BASH_ENV
+            source $BASH_ENV
+            nvm install v12.18.1 && nvm use v12.18.1 && nvm alias default v12.18.1
+      - run:
+          name: pip install pypi pm_cicd and gitpython
+          command: |
+            pip install --extra-index-url http://${PYPI_USER}:${PYPI_PASS}@pypi.policyme.com:8081 --trusted-host pypi.policyme.com pm_cicd
+            pip3 install gitpython
+      - run:
+          name: running auto bump
+          command: |
+            python -c "from pm_cicd.exec import exec_deploy; exec_deploy()"
+      # - run:
+      #     name: elasticbeanstalk init
+      #     command: |
+      #       eb init --platform "${EB_PLATFORM}" --region ${AWS_DEFAULT_REGION} ${CIRCLE_PROJECT_REPONAME}
+      #       env='dev'
+      #       if [[ ${CIRCLE_BRANCH} == "release/NP2-317-new-product" ]]; then
+      #         env='test'
+      #       elif [[ ${CIRCLE_BRANCH} == "master" ]]; then
+      #         env='prod'
+      #       fi
+      #       eb use ${CIRCLE_PROJECT_REPONAME}-${env}
+      # - run:
+      #     name: invoking eb-override.sh
+      #     command: |
+      #       env='dev'
+      #       mode='pmdeploy'
+      #       if [[ ${CIRCLE_BRANCH} == "release/NP2-317-new-product" ]]; then
+      #         env='test'
+      #       elif [[ ${CIRCLE_BRANCH} == "master" ]]; then
+      #         env='prod'
+      #         mode='pmdeploy-bg'
+      #       fi
+      #       curl \
+      #         -H "Authorization: token ${GITHUB_TOKEN}" \
+      #         -H "Accept: application/vnd.github.v3.raw" \
+      #         https://api.github.com/repos/policyme/global-tools-development/contents/scripts/eb-override.sh > eb-override.sh
+      #       curl \
+      #         -H "Authorization: token ${GITHUB_TOKEN}" \
+      #         -H "Accept: application/vnd.github.v3.raw" \
+      #         https://api.github.com/repos/policyme/global-tools-development/contents/scripts/upload-to-sentry.sh > upload-to-sentry.sh
+      #       chmod 744 ./eb-override.sh
+      #       chmod 744 ./upload-to-sentry.sh
+      #       ./eb-override.sh ${mode} ${env} --circleci
 workflows:
-  node-tests:
+  policyme:
     jobs:
-      - node/test
+      - eb-check-pull:
+          context: 
+            - PM_GITHUB_CONTEXT
+      - jest:
+          context:
+            - PM_GITHUB_CONTEXT
+      - deploy:
+          context: 
+            - PM_GITHUB_CONTEXT
+            - PM_AWS_CONTEXT
+            - PM_SLACK_CONTEXT
+            - PM_PYPI_CONTEXT
+          requires:
+            - eb-check-pull
+            - jest
+          filters:
+            branches:
+              only:
+              - master
+              - develop
+              - release/NP2-317-new-product
