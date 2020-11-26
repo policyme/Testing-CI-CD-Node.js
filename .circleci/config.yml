@@ -28,8 +28,8 @@ jobs:
     steps:
       - checkout
       - run: echo "test"
-      # - run: npm install # install dependencies
-      # - run: npm install --only=dev # install dev dependencies
+      - run: npm install # install dependencies
+      - run: npm install --only=dev # install dev dependencies
       # - run: npm run test-circle-ci # run jest tests
   deploy:
     docker:
@@ -41,11 +41,11 @@ jobs:
       #     aws-secret-access-key: AWS_SECRET_ACCESS_KEY # env var defined on circleci 
       #     aws-region: AWS_DEFAULT_REGION # env var defined on circleci 
       #     version: '2'
-      # - run:
-      #     name: installing eb cli and setuptools
-      #     command: |
-      #       sudo pip install setuptools awsebcli --upgrade
-      #       sudo pip install -Iv botocore==1.17
+      - run:
+          name: installing eb cli and setuptools
+          command: |
+            sudo pip install setuptools awsebcli --upgrade
+            sudo pip install -Iv botocore==1.17
       - run:
           name: install nvm and use node 12.18.1
           command: |
