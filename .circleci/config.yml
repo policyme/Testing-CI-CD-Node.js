@@ -107,34 +107,6 @@ workflows:
       - jest:
           context:
             - PM_GITHUB_CONTEXT
-      - cypress-1:
-          context:
-            - PM_CYPRESS_CONTEXT
-            - PM_GITHUB_CONTEXT
-      - cypress-2:
-          context:
-            - PM_CYPRESS_CONTEXT
-            - PM_GITHUB_CONTEXT
-      - cypress-3:
-          context:
-            - PM_CYPRESS_CONTEXT
-            - PM_GITHUB_CONTEXT
-      - cypress-5:
-          context:
-            - PM_CYPRESS_CONTEXT
-            - PM_GITHUB_CONTEXT
-      - cypress6-7:
-          context:
-            - PM_CYPRESS_CONTEXT
-            - PM_GITHUB_CONTEXT
-      - cypress8-9:
-          context:
-            - PM_CYPRESS_CONTEXT
-            - PM_GITHUB_CONTEXT
-      - cypress10-11:
-          context:
-            - PM_CYPRESS_CONTEXT
-            - PM_GITHUB_CONTEXT
       - deploy:
           context: 
             - PM_GITHUB_CONTEXT
@@ -144,13 +116,6 @@ workflows:
           requires:
             - eb-check-pull
             - jest
-            - cypress-1
-            - cypress-2
-            - cypress-3
-            - cypress-5
-            - cypress6-7
-            - cypress8-9
-            - cypress10-11
           filters:
             branches:
               only:
