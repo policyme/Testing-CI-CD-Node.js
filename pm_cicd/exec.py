@@ -75,7 +75,7 @@ def exec_deploy():
       # if develop -> master merge then we should also update develop
       if update_develop:
         cmd = '''
-          echo "f{COLORS.CYAN}automerging master -> dev ....{COLORS.ENDC}"
+          echo "------ Automerging master -> develop ------"
           git fetch origin {}
           git checkout {}
           git merge origin/{}
@@ -85,7 +85,7 @@ def exec_deploy():
 
         exec_subprocess(cmd)
     except Exception as e:
-      print("f{COLORS.RED}Something went wrong. Exiting autobump....{COLORS.ENDC}")
+      print(COLORS.FAIL + "Something went wrong. Exiting autobump...."+ COLORS.ENDC)
       exit(e)
   else:
     print("Not in {} nor {} branch, skipping version bump and changelog"\
