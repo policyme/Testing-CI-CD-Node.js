@@ -30,7 +30,7 @@ jobs:
       - run: echo "test"
       # - run: npm install # install dependencies
       # - run: npm install --only=dev # install dev dependencies
-      # - run: npm run test-circle-ci # run jest tests
+      # # - run: npm run test-circle-ci # run jest tests
   deploy:
     docker:
       - image: circleci/python:latest
@@ -59,7 +59,6 @@ jobs:
       - run:
           name: pip install pypi pm_cicd and gitpython
           command: |
-            pip install --extra-index-url http://${PYPI_USER}:${PYPI_PASS}@pypi.policyme.com:8081 --trusted-host pypi.policyme.com pm_cicd
             pip3 install gitpython
       - run:
           name: running auto bump
