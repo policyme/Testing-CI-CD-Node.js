@@ -3,7 +3,6 @@ import os
 import sys
 import json
 import git
-
 from pm_cicd.utils.consts import (
   BRANCHES,
   BRANCH_TYPE,
