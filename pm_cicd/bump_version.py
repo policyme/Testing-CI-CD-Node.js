@@ -33,6 +33,7 @@ def update_version(branch, version):
 
   # if it isn't a merge pr, we don't do anything
   if not is_merge_pull_request(commit_message):
+    print('not merge pr?')
     return None
 
   new_version = None
