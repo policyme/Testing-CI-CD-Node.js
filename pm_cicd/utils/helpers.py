@@ -1,7 +1,6 @@
 '''Module for searching and returning the path of the _version.py and package.json file'''
 import os
 import json
-import re
 from subprocess import run
 
 from pm_cicd.utils.consts import BRANCHES, BRANCH_TYPE, SKIP_BUMP
@@ -82,8 +81,8 @@ def get_version_js(path):
 # runs subprocess. tracks stdout/stderr
 def exec_subprocess(raw_cmd):
   print(COLORS.CYAN + 'Running commands....' + COLORS.ENDC)
-  lines = filter(lambda x: not re.match(r'^\s*$', x), raw_cmd)
-  for line in lines:
+  for raw_line in cmd.split('\n'):
+    line = raw_line.strip()
     print(COLORS.GREEN + '{}'.format(line) + COLORS.ENDC)
     run(line, check=True, shell=True, text=True)
 
