@@ -75,6 +75,7 @@ def exec_deploy():
       # if develop -> master merge then we should also update develop
       if update_develop:
         cmd = '''
+          echo "automerging master -> dev ...."
           git fetch origin {}
           git checkout {}
           git merge origin/{}
