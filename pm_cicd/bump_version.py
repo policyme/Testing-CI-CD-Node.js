@@ -107,6 +107,8 @@ def save_version_js(path, version):
 
 def bump_version(path, current_version, branch):
   new_version = update_version(branch, current_version)
+  print('current_version {}'.format(current_version))
+  print('new_version {}'.format(new_version))
 
   if new_version is not None:
     if is_python_project():
