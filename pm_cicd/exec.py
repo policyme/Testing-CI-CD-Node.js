@@ -85,7 +85,7 @@ def exec_deploy():
 
         exec_subprocess(cmd)
     except Exception as e:
-      print(COLORS.FAIL + "Something went wrong. Exiting autobump...."+ COLORS.ENDC)
+      print(COLORS.RED + "Something went wrong. Exiting autobump...."+ COLORS.ENDC)
       exit(e)
   else:
     print("Not in {} nor {} branch, skipping version bump and changelog"\
