@@ -103,6 +103,7 @@ def save_version_js(path, version):
   # Dumping the updated json into the package.json file
   with open(path, 'w') as fp:
     json.dump(parsed_json, fp, indent=2)
+    fp.write('\n') # appends newline at the end
 
 def bump_version(path, current_version, branch):
   new_version = update_version(branch, current_version)
