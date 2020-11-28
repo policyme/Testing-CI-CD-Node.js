@@ -1,6 +1,6 @@
 {
   "name": "life-webapp-main",
-  "version": "3.75.2-dev-2",
+  "version": "3.75.2",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.11.5",
