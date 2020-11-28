@@ -4,7 +4,7 @@ from subprocess import run, PIPE, STDOUT
 
 from pm_cicd.bump_version import bump_version
 from pm_cicd.generate_changelog import gen_changelog
-from pm_cicd.utils.consts import BRANCHES
+from pm_cicd.utils.consts import BRANCHES, COLORS
 from pm_cicd.utils.version_tools import (
   verify_version_with_master,
   get_current_version,
@@ -75,7 +75,7 @@ def exec_deploy():
       # if develop -> master merge then we should also update develop
       if update_develop:
         cmd = '''
-          echo "automerging master -> dev ...."
+          echo "f{COLORS.OKCYAN}automerging master -> dev ....{COLORS.ENDC}"
           git fetch origin {}
           git checkout {}
           git merge origin/{}
@@ -85,7 +85,7 @@ def exec_deploy():
 
         exec_subprocess(cmd)
     except Exception as e:
-      print("----------\nSomething went wrong. Exiting autobump....\n----------")
+      print("f{COLORS.FAIL}Something went wrong. Exiting autobump....{COLORS.FAIL}")
       exit(e)
   else:
     print("Not in {} nor {} branch, skipping version bump and changelog"\
