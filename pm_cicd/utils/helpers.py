@@ -79,7 +79,7 @@ def get_version_js(path):
   return version
 
 # runs subprocess. tracks stdout/stderr
-def exec_subprocess(raw_cmd):
+def exec_subprocess(cmd):
   print(COLORS.CYAN + 'Running commands....' + COLORS.ENDC)
   for raw_line in cmd.split('\n'):
     line = raw_line.strip()
