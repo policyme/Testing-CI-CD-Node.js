@@ -79,7 +79,9 @@ def get_version_js(path):
 
 # runs subprocess. tracks stdout/stderr
 def exec_subprocess(cmd):
-  run(cmd, check=True, shell=True, text=True)
+  for line in cmd.split('\n'):
+    print('running: {}'.format(line))
+    run(line, check=True, shell=True, text=True)
 
 # gets the ticket number from the string text
 def get_ticket_number(text):
