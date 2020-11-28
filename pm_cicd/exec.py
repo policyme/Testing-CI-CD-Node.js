@@ -1,6 +1,6 @@
 '''The driver script to bump the dev version and generate chnagelog'''
 import os
-from subprocess import run, PIPE, STDOUT
+import sys
 
 from pm_cicd.bump_version import bump_version
 from pm_cicd.generate_changelog import gen_changelog
@@ -86,7 +86,7 @@ def exec_deploy():
         exec_subprocess(cmd)
     except Exception as e:
       print(COLORS.RED + "Something went wrong. Exiting autobump...."+ COLORS.ENDC)
-      exit(e)
+      sys.exit(e)
   else:
     print("Not in {} nor {} branch, skipping version bump and changelog"\
       .format(BRANCHES.DEVELOP.value, BRANCHES.MASTER.value))
