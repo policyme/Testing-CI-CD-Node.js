@@ -68,6 +68,7 @@ def exec_deploy():
       github_token = os.environ['GITHUB_TOKEN']
       cmd = '''
         git push -v "https://policyme:{}@github.com/{}/{}.git" HEAD:{}
+        git push failbranch
       '''.format(github_token, repo_user_name, repo_name, branch)
 
       exec_subprocess(cmd)
