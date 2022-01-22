@@ -117,7 +117,7 @@
     "fs-extra": "^9.0.1",
     "jest": "^26.4.2",
     "jest-enzyme": "^7.1.2",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.1.1"
   },
   "scripts": {
     "dev-mock": "cross-env USE_MOCKS=true NODE_ENV=development node server/index.js",
